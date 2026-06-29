@@ -1263,23 +1263,16 @@
             position: relative;
             display: flex;
             justify-content: center;
+            align-items: center;
         }
 
-        .preserve-circle {
+        .preserve-img {
             width: 350px;
             height: 350px;
-            background: linear-gradient(135deg, var(--accent), var(--accent-light));
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            object-fit: contain;
             position: relative;
-            box-shadow: var(--shadow-lg);
-        }
-
-        .preserve-circle::before {
-            content: '🗣️';
-            font-size: 5rem;
+            z-index: 2;
+            filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.15));
         }
 
         .orbit-ring {
@@ -1924,9 +1917,10 @@
                 Mother Tongue
             </a>
             <ul class="nav-links" id="navLinks">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#features">Features</a></li>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="service.html">Services</a></li>
+                <li><a href="features.html">Features</a></li>
                 <li><a href="#volunteer">Volunteer</a></li>
                 <li><a href="#partners">Partners</a></li>
                 <li><a href="#contact">Contact</a></li>
@@ -1956,107 +1950,401 @@
                 </div>
             </div>
             <div class="hero-visual">
+                <!-- Scoped CSS for the Auto Slider -->
+                <style>
+                    .hero-visual .phone-frame {
+                        width: 375px;
+                        height: 812px;
+                        background: transparent !important;
+                        box-shadow: none !important;
+                        border: none !important;
+                        overflow: hidden;
+                        position: relative;
+                    }
+
+                    .hero-visual .slider-container {
+                        width: 100%;
+                        height: 100%;
+                        overflow: hidden;
+                        position: relative;
+                    }
+
+                    .hero-visual .slider-track {
+                        display: flex;
+                        width: 300%;
+                        height: 100%;
+                        transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+                    }
+
+                    .hero-visual .slide {
+                        width: 33.333%;
+                        height: 100%;
+                        padding: 50px 24px 40px;
+                        display: flex;
+                        flex-direction: column;
+                        position: relative;
+                    }
+
+                    /* Pagination */
+                    .hero-visual .pagination {
+                        display: none;
+                        justify-content: center;
+                        gap: 10px;
+                        margin-top: 24px;
+                        margin-bottom: 16px;
+                    }
+
+                    .hero-visual .pag-dot {
+                        width: 10px;
+                        height: 10px;
+                        border-radius: 50%;
+                        background: rgba(0, 0, 0, 0.15);
+                        transition: all 0.3s ease;
+                        cursor: pointer;
+                        position: relative;
+                        overflow: hidden;
+                    }
+
+                    .hero-visual .pag-dot.active {
+                        width: 24px;
+                        border-radius: 12px;
+                        background: rgba(255, 255, 255, 0.8);
+                    }
+
+                    /* Auto-play progress indicator on active dot */
+                    .hero-visual .pag-dot.active::after {
+                        content: '';
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        height: 100%;
+                        background: #66bb6a;
+                        border-radius: 12px;
+                        width: 0%;
+                        animation: progressFill 3s linear forwards;
+                    }
+
+                    @keyframes progressFill {
+                        0% {
+                            width: 0%;
+                        }
+
+                        100% {
+                            width: 100%;
+                        }
+                    }
+
+
+                    /* Auto-play indicator */
+                    .hero-visual .auto-play-indicator {
+                        position: absolute;
+                        top: 12px;
+                        left: 50%;
+                        transform: translateX(-50%);
+                        display: none;
+                        align-items: center;
+                        gap: 6px;
+                        background: rgba(255, 255, 255, 0.7);
+                        padding: 4px 12px;
+                        border-radius: 20px;
+                        font-size: 11px;
+                        color: #5d4037;
+                        backdrop-filter: blur(10px);
+                        z-index: 100;
+                        opacity: 0.8;
+                        transition: opacity 0.3s;
+                    }
+
+                    .hero-visual .auto-play-indicator.paused {
+                        opacity: 0.3;
+                    }
+
+                    .hero-visual .play-icon {
+                        width: 8px;
+                        height: 8px;
+                        background: #66bb6a;
+                        border-radius: 50%;
+                        animation: pulse 1.5s infinite;
+                    }
+
+                    .hero-visual .auto-play-indicator.paused .play-icon {
+                        animation: none;
+                        background: #999;
+                    }
+
+                    @keyframes pulse {
+
+                        0%,
+                        100% {
+                            opacity: 1;
+                            transform: scale(1);
+                        }
+
+                        50% {
+                            opacity: 0.5;
+                            transform: scale(0.8);
+                        }
+                    }
+
+                    /* Touch area */
+                    .hero-visual .touch-area {
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        right: 0;
+                        bottom: 0;
+                        z-index: 10;
+                    }
+
+                    /* Mobile scaling for the Auto Slider phone frame */
+                    @media (max-width: 500px) {
+                        .hero-visual .phone-frame {
+                            width: 100%;
+                            max-width: 340px;
+                            height: 720px;
+                        }
+                    }
+
+                    /* Image slides */
+                    .hero-visual .slide.slide-image {
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        justify-content: center;
+                        padding: 20px 10px 10px;
+                        background: transparent;
+                    }
+
+                    .hero-visual .slide-phone-img {
+                        width: 100%;
+                        max-width: 260px;
+                        height: auto;
+                        object-fit: contain;
+                        flex: 1;
+                        display: block;
+                        pointer-events: none;
+                        user-select: none;
+                    }
+                </style>
+
                 <div class="phone-frame">
-                    <div class="phone-notch"></div>
+                    <div class="auto-play-indicator" id="autoIndicator">
+                        <div class="play-icon"></div>
+                        <span>Auto</span>
+                    </div>
 
-                    <!-- Decorative Leaves -->
-                    <div class="leaf-decoration leaf-1">🌿</div>
-                    <div class="leaf-decoration leaf-2">🍃</div>
+                    <div class="slider-container" id="slider">
+                        <div class="slider-track" id="track">
 
-                    <div class="app-container">
-                        <!-- Streak -->
-                        <div class="streak-badge">
-                            🔥 5 Day Streak
-                        </div>
-
-                        <!-- Counter -->
-                        <div class="counter-badge" id="card-counter">1 / 5</div>
-
-                        <!-- Header -->
-                        <div class="app-header">
-                            <div class="logo-icon">🌱</div>
-                            <h1>Mother Tongue</h1>
-                            <p>Learn in your language</p>
-                        </div>
-
-                        <!-- Language Selector -->
-                        <div class="lang-selector">
-                            <button class="lang-pill active">Mundari</button>
-                            <button class="lang-pill">Santali</button>
-                            <button class="lang-pill">Ho</button>
-                            <button class="lang-pill">Kurukh</button>
-                            <button class="lang-pill">More Soon</button>
-                        </div>
-
-                        <!-- Card Slider -->
-                        <div class="slider-container" id="slider">
-                            <!-- Cards injected by JS -->
-                        </div>
-
-                        <!-- Progress Section -->
-                        <div class="progress-section">
-                            <div class="progress-item">
-                                <div class="progress-label">
-                                    <span class="status-dot" style="background: #52B788;"></span>
-                                    Master
+                            <!-- Slide 1: Home Screen -->
+                            <div class="slide slide-image">
+                                <img src="images/mobile-removebg-preview.png" alt="Trilingo Home Screen"
+                                    class="slide-phone-img" />
+                                <div class="pagination">
+                                    <div class="pag-dot active" onclick="goToSlide(0)"></div>
+                                    <div class="pag-dot" onclick="goToSlide(1)"></div>
+                                    <div class="pag-dot" onclick="goToSlide(2)"></div>
                                 </div>
-                                <div class="progress-bar-bg">
-                                    <div class="progress-bar-fill master" id="master-bar"></div>
-                                </div>
-                                <div class="progress-percent" id="master-text">100%</div>
                             </div>
 
-                            <div class="progress-item">
-                                <div class="progress-label">
-                                    <span class="status-dot" style="background: #D4A373;"></span>
-                                    Reviewing
+                            <!-- Slide 2: Explore Screen -->
+                            <div class="slide slide-image">
+                                <img src="images/mobile1-removebg-preview.png" alt="Trilingo Explore Screen"
+                                    class="slide-phone-img" />
+                                <div class="pagination">
+                                    <div class="pag-dot" onclick="goToSlide(0)"></div>
+                                    <div class="pag-dot active" onclick="goToSlide(1)"></div>
+                                    <div class="pag-dot" onclick="goToSlide(2)"></div>
                                 </div>
-                                <div class="progress-bar-bg">
-                                    <div class="progress-bar-fill reviewing" id="reviewing-bar"></div>
-                                </div>
-                                <div class="progress-percent" id="reviewing-text">0%</div>
                             </div>
 
-                            <div class="progress-item">
-                                <div class="progress-label">
-                                    <span class="status-dot" style="background: #E76F51;"></span>
-                                    Learning
+                            <!-- Slide 3: Lesson Screen -->
+                            <div class="slide slide-image">
+                                <img src="images/mobile2-removebg-preview.png" alt="Trilingo Lesson Screen"
+                                    class="slide-phone-img" />
+                                <div class="pagination">
+                                    <div class="pag-dot" onclick="goToSlide(0)"></div>
+                                    <div class="pag-dot" onclick="goToSlide(1)"></div>
+                                    <div class="pag-dot active" onclick="goToSlide(2)"></div>
                                 </div>
-                                <div class="progress-bar-bg">
-                                    <div class="progress-bar-fill learning" id="learning-bar"></div>
-                                </div>
-                                <div class="progress-percent" id="learning-text">0%</div>
                             </div>
-                        </div>
 
-                        <!-- Navigation Dots -->
-                        <div class="nav-dots" id="nav-dots"></div>
-
-                        <!-- Swipe Buttons -->
-                        <div class="swipe-buttons">
-                            <button class="swipe-btn btn-dislike" onclick="swipeCard('left')"
-                                title="Still Learning">✕</button>
-                            <button class="swipe-btn btn-flip" onclick="flipCurrentCard()" title="Flip Card">↻</button>
-                            <button class="swipe-btn btn-like" onclick="swipeCard('right')" title="Mastered">✓</button>
-                        </div>
-
-                        <div class="swipe-labels">
-                            <span class="swipe-label">Learning</span>
-                            <span class="swipe-label">Flip</span>
-                            <span class="swipe-label">Mastered</span>
                         </div>
                     </div>
                 </div>
+
+                <!-- Slider Logic Script -->
+                <script>
+                    (function () {
+                        let currentSlide = 0;
+                        const totalSlides = 3;
+                        const track = document.getElementById('track');
+                        const slider = document.getElementById('slider');
+                        const autoIndicator = document.getElementById('autoIndicator');
+                        let startX = 0;
+                        let currentX = 0;
+                        let isDragging = false;
+
+                        // Auto-play settings
+                        const AUTO_PLAY_INTERVAL = 3000; // 3 seconds
+                        let autoPlayTimer = null;
+                        let isPaused = false;
+
+                        function updateSlider() {
+                            track.style.transform = `translateX(-${currentSlide * 33.333}%)`;
+
+                            // Update all pagination dots across all slides
+                            const allDots = document.querySelectorAll('.pag-dot');
+                            allDots.forEach((dot, index) => {
+                                const slideIndex = Math.floor(index / totalSlides);
+                                const dotIndex = index % totalSlides;
+                                if (dotIndex === currentSlide) {
+                                    dot.classList.add('active');
+                                } else {
+                                    dot.classList.remove('active');
+                                }
+                            });
+
+                            // Restart progress animation
+                            restartProgressAnimation();
+                        }
+
+                        function restartProgressAnimation() {
+                            const activeDots = document.querySelectorAll('.pag-dot.active');
+                            activeDots.forEach(dot => {
+                                dot.style.animation = 'none';
+                                dot.offsetHeight; // Trigger reflow
+                                dot.style.animation = '';
+                            });
+                        }
+
+                        window.goToSlide = function (index) {
+                            currentSlide = index;
+                            updateSlider();
+                            resetAutoPlay();
+                        }
+
+                        function nextSlide() {
+                            currentSlide = (currentSlide + 1) % totalSlides;
+                            updateSlider();
+                        }
+
+                        function prevSlide() {
+                            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+                            updateSlider();
+                        }
+
+                        // Auto-play functions
+                        function startAutoPlay() {
+                            if (autoPlayTimer) clearInterval(autoPlayTimer);
+                            autoPlayTimer = setInterval(() => {
+                                if (!isPaused) {
+                                    nextSlide();
+                                }
+                            }, AUTO_PLAY_INTERVAL);
+                            isPaused = false;
+                            autoIndicator.classList.remove('paused');
+                        }
+
+                        function pauseAutoPlay() {
+                            isPaused = true;
+                            autoIndicator.classList.add('paused');
+                        }
+
+                        function resetAutoPlay() {
+                            startAutoPlay();
+                        }
+
+                        // Touch events
+                        slider.addEventListener('touchstart', (e) => {
+                            startX = e.touches[0].clientX;
+                            isDragging = true;
+                            pauseAutoPlay();
+                        }, { passive: true });
+
+                        slider.addEventListener('touchmove', (e) => {
+                            if (!isDragging) return;
+                            currentX = e.touches[0].clientX;
+                        }, { passive: true });
+
+                        slider.addEventListener('touchend', () => {
+                            if (!isDragging) return;
+                            isDragging = false;
+                            const diff = startX - currentX;
+                            if (Math.abs(diff) > 50) {
+                                if (diff > 0) nextSlide();
+                                else prevSlide();
+                            }
+                            startAutoPlay();
+                        });
+
+                        // Mouse events for desktop
+                        slider.addEventListener('mousedown', (e) => {
+                            startX = e.clientX;
+                            isDragging = true;
+                            pauseAutoPlay();
+                        });
+
+                        slider.addEventListener('mousemove', (e) => {
+                            if (!isDragging) return;
+                            currentX = e.clientX;
+                        });
+
+                        slider.addEventListener('mouseup', () => {
+                            if (!isDragging) return;
+                            isDragging = false;
+                            const diff = startX - currentX;
+                            if (Math.abs(diff) > 50) {
+                                if (diff > 0) nextSlide();
+                                else prevSlide();
+                            }
+                            startAutoPlay();
+                        });
+
+                        slider.addEventListener('mouseleave', () => {
+                            if (isDragging) {
+                                isDragging = false;
+                                startAutoPlay();
+                            }
+                        });
+
+                        // Hover pause for desktop
+                        slider.addEventListener('mouseenter', () => {
+                            pauseAutoPlay();
+                        });
+
+                        slider.addEventListener('mouseleave', () => {
+                            if (!isDragging) {
+                                startAutoPlay();
+                            }
+                        });
+
+                        // Keyboard navigation
+                        document.addEventListener('keydown', (e) => {
+                            if (e.key === 'ArrowLeft') {
+                                prevSlide();
+                                resetAutoPlay();
+                            }
+                            if (e.key === 'ArrowRight') {
+                                nextSlide();
+                                resetAutoPlay();
+                            }
+                        });
+
+                        // Start auto-play on load
+                        startAutoPlay();
+                    })();
+                </script>
             </div>
         </div>
     </section>
 
-    <!-- About Section -->
+    <!-- About Section -->-*
     <section class="section about" id="about">
         <div class="section-container">
             <div class="about-grid">
                 <div class="about-image">
-                    <div class="about-img-main"></div>
+                    <img src="./images/education.png" class="about-img-main" style="object-fit: cover;" alt="Education">
                     <img src="./images/about-accent.png" class="about-img-accent" alt="Tribal children learning">
                 </div>
                 <div class="about-content">
@@ -2071,19 +2359,19 @@
                         deserves:</p>
                     <ul class="beliefs-list">
                         <li>
-                            <span class="belief-icon">🗣️</span>
+                            <span class="belief-icon">📖</span>
                             <span class="belief-text">Education in their mother tongue</span>
                         </li>
                         <li>
-                            <span class="belief-icon">⚖️</span>
+                            <span class="belief-icon">🎓</span>
                             <span class="belief-text">Equal learning opportunities</span>
                         </li>
                         <li>
-                            <span class="belief-icon">🤝</span>
+                            <span class="belief-icon">🌍</span>
                             <span class="belief-text">Cultural pride and inclusion</span>
                         </li>
                         <li>
-                            <span class="belief-icon">💻</span>
+                            <span class="belief-icon">📱</span>
                             <span class="belief-text">Access to engaging digital learning</span>
                         </li>
                     </ul>
@@ -2126,17 +2414,17 @@
             </div>
             <div class="why-grid">
                 <div class="why-card">
-                    <div class="why-icon">🧠</div>
+                    <div class="why-icon">📚</div>
                     <h3>Learning Becomes Easier</h3>
                     <p>Children understand concepts faster when taught in the language they speak at home.</p>
                 </div>
                 <div class="why-card">
-                    <div class="why-icon">🏛️</div>
+                    <div class="why-icon">🏺</div>
                     <h3>Stronger Cultural Connection</h3>
                     <p>Language carries traditions, stories, history, and identity across generations.</p>
                 </div>
                 <div class="why-card">
-                    <div class="why-icon">💪</div>
+                    <div class="why-icon">🙋</div>
                     <h3>Better Classroom Confidence</h3>
                     <p>Students participate more actively when they are comfortable with the language of learning.</p>
                 </div>
@@ -2159,7 +2447,7 @@
             </div>
             <div class="features-grid">
                 <div class="feature-card">
-                    <div class="feature-icon">📚</div>
+                    <div class="feature-icon">🧩</div>
                     <h3>Interactive Lessons</h3>
                     <p>Simple and engaging lessons designed for young learners.</p>
                 </div>
@@ -2179,7 +2467,7 @@
                     <p>Learning paths adapt to each student's pace and progress.</p>
                 </div>
                 <div class="feature-card">
-                    <div class="feature-icon">📱</div>
+                    <div class="feature-icon">🌐</div>
                     <h3>Accessible Anywhere</h3>
                     <p>Use the platform anytime on mobile, tablet, or desktop.</p>
                 </div>
@@ -2237,7 +2525,7 @@
                     <div class="orbit-ring">
                         <div class="orbit-dot"></div>
                     </div>
-                    <div class="preserve-circle"></div>
+                    <img src="./images/education5.png" class="preserve-img" alt="Language Preservation">
                 </div>
             </div>
         </div>
@@ -2248,7 +2536,8 @@
         <div class="section-container">
             <div class="volunteer-grid">
                 <div class="volunteer-visual">
-                    <div class="volunteer-img"></div>
+                    <img src="./images/education 1.png" class="volunteer-img" style="object-fit: cover;"
+                        alt="Volunteer">
                 </div>
                 <div class="volunteer-content">
                     <span class="section-label">Join Us</span>
@@ -2297,7 +2586,7 @@
                     <p>Bring multilingual education into classrooms and improve learning outcomes.</p>
                 </div>
                 <div class="partner-card">
-                    <div class="partner-icon">🤝</div>
+                    <div class="partner-icon">🏢</div>
                     <h3>NGOs & Institutions</h3>
                     <p>Support inclusive and culturally connected education initiatives.</p>
                 </div>
@@ -2399,7 +2688,7 @@
                             </div>
                         </div>
                         <div class="contact-item">
-                            <div class="contact-icon">📍</div>
+                            <div class="contact-icon">🗺️</div>
                             <div>
                                 <strong>Location</strong>
                                 <span>India</span>
@@ -2450,9 +2739,10 @@
             <div class="footer-column">
                 <h4>Quick Links</h4>
                 <ul class="footer-links">
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#features">Languages</a></li>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="service.html">Services</a></li>
+                    <li><a href="features.html">Features</a></li>
                     <li><a href="#volunteer">Volunteer</a></li>
                     <li><a href="#partners">Partnerships</a></li>
                     <li><a href="#contact">Contact</a></li>
@@ -2528,248 +2818,7 @@
         });
     </script>
 
-    <script>
-        // Mundari Vocabulary Data (Indigenous Language)
-        const vocabulary = [
-            {
-                word: 'ᱦᱚᱲ',
-                meaning: 'Hello / Person',
-                example: 'Used to greet someone respectfully in the community',
-                hint: 'Tap to see meaning',
-                emoji: '👋'
-            },
-            {
-                word: 'ᱫᱟᱜ',
-                meaning: 'Water',
-                example: 'Essential for life in the forest villages',
-                hint: 'Tap to see meaning',
-                emoji: '💧'
-            },
-            {
-                word: 'ᱢᱟᱨᱟᱝ',
-                meaning: 'Big / Great',
-                example: 'The great spirit of the mountains',
-                hint: 'Tap to see meaning',
-                emoji: '⛰️'
-            },
-            {
-                word: 'ᱦᱩᱭ',
-                meaning: 'Sun / Light',
-                example: 'The sun rises over the Sal trees',
-                hint: 'Tap to see meaning',
-                emoji: '☀️'
-            },
-            {
-                word: 'ᱡᱟᱹᱛ',
-                meaning: 'Community',
-                example: 'We learn together as one community',
-                hint: 'Tap to see meaning',
-                emoji: '🤝'
-            }
-        ];
 
-        let currentIndex = 0;
-        let stats = { master: 1, reviewing: 0, learning: 0 };
-
-        // Initialize
-        function init() {
-            const slider = document.getElementById('slider');
-            const dotsContainer = document.getElementById('nav-dots');
-
-            vocabulary.forEach((item, index) => {
-                const cardWrapper = document.createElement('div');
-                cardWrapper.className = 'card-wrapper';
-                if (index === 0) cardWrapper.classList.add('entering');
-                cardWrapper.style.zIndex = vocabulary.length - index;
-                cardWrapper.dataset.index = index;
-
-                cardWrapper.innerHTML = `
-                    <div class="card" onclick="flipCard(this)">
-                        <div class="card-face card-front">
-                            <div style="font-size: 48px; margin-bottom: 10px;">${item.emoji}</div>
-                            <div class="word-text">${item.word}</div>
-                            <div class="word-divider"></div>
-                            <div class="word-hint">
-                                <span>👆</span> ${item.hint}
-                            </div>
-                            <div class="tap-hint">
-                                <span>🔄</span> Tap to flip card
-                            </div>
-                        </div>
-                        <div class="card-face card-back">
-                            <div style="font-size: 48px; margin-bottom: 10px;">${item.emoji}</div>
-                            <div class="word-text" style="font-size: 36px;">${item.word}</div>
-                            <div class="word-divider"></div>
-                            <div class="word-meaning">${item.meaning}</div>
-                            <div class="word-example">"${item.example}"</div>
-                            <div class="tap-hint">
-                                <span>🔄</span> Tap to flip back
-                            </div>
-                        </div>
-                    </div>
-                `;
-
-                // Touch Swipe Logic
-                let startX = 0, startY = 0;
-                let isDragging = false;
-
-                cardWrapper.addEventListener('touchstart', (e) => {
-                    startX = e.touches[0].clientX;
-                    startY = e.touches[0].clientY;
-                    isDragging = true;
-                }, { passive: true });
-
-                cardWrapper.addEventListener('touchmove', (e) => {
-                    if (!isDragging) return;
-                    const currentX = e.touches[0].clientX;
-                    const diffX = currentX - startX;
-                    const diffY = e.touches[0].clientY - startY;
-
-                    // Only swipe horizontally
-                    if (Math.abs(diffX) > Math.abs(diffY)) {
-                        e.preventDefault();
-                        cardWrapper.style.transform = `translateX(${diffX}px) rotate(${diffX * 0.04}deg)`;
-                    }
-                }, { passive: false });
-
-                cardWrapper.addEventListener('touchend', (e) => {
-                    isDragging = false;
-                    const endX = e.changedTouches[0].clientX;
-                    const diff = endX - startX;
-
-                    if (Math.abs(diff) > 80) {
-                        swipeCard(diff > 0 ? 'right' : 'left');
-                    } else {
-                        cardWrapper.style.transition = 'transform 0.3s ease';
-                        cardWrapper.style.transform = '';
-                        setTimeout(() => {
-                            cardWrapper.style.transition = '';
-                        }, 300);
-                    }
-                });
-
-                slider.appendChild(cardWrapper);
-
-                // Dots
-                const dot = document.createElement('div');
-                dot.className = 'dot' + (index === 0 ? ' active' : '');
-                dot.onclick = () => goToCard(index);
-                dotsContainer.appendChild(dot);
-            });
-
-            updateStats();
-        }
-
-        function flipCard(card) {
-            card.classList.toggle('flipped');
-        }
-
-        function flipCurrentCard() {
-            const currentCard = document.querySelector('.card-wrapper:not(.swiping-left):not(.swiping-right) .card');
-            if (currentCard) flipCard(currentCard);
-        }
-
-        function swipeCard(direction) {
-            const cards = document.querySelectorAll('.card-wrapper');
-            const currentCard = cards[currentIndex];
-
-            if (!currentCard || currentCard.style.display === 'none') return;
-
-            currentCard.classList.add(direction === 'left' ? 'swiping-left' : 'swiping-right');
-
-            if (direction === 'right') {
-                stats.master = Math.min(stats.master + 1, vocabulary.length);
-                stats.learning = Math.max(0, stats.learning - 1);
-            } else {
-                stats.learning = Math.min(stats.learning + 1, vocabulary.length);
-                stats.master = Math.max(0, stats.master - 1);
-            }
-
-            setTimeout(() => {
-                currentCard.style.display = 'none';
-                currentIndex++;
-
-                if (currentIndex >= vocabulary.length) {
-                    currentIndex = 0;
-                    stats = { master: 1, reviewing: 0, learning: 0 };
-                    cards.forEach((card, idx) => {
-                        card.style.display = 'block';
-                        card.classList.remove('swiping-left', 'swiping-right');
-                        card.style.transform = '';
-                        card.style.zIndex = vocabulary.length - idx;
-                        if (idx === 0) {
-                            card.classList.add('entering');
-                            setTimeout(() => card.classList.remove('entering'), 600);
-                        }
-                    });
-                }
-
-                updateDots();
-                updateCounter();
-                updateStats();
-            }, 500);
-        }
-
-        function goToCard(index) {
-            const cards = document.querySelectorAll('.card-wrapper');
-            cards.forEach((card, idx) => {
-                if (idx < index) {
-                    card.style.display = 'none';
-                } else {
-                    card.style.display = 'block';
-                    card.classList.remove('swiping-left', 'swiping-right');
-                    card.style.transform = '';
-                    card.style.zIndex = vocabulary.length - idx;
-                }
-            });
-            currentIndex = index;
-            updateDots();
-            updateCounter();
-        }
-
-        function updateDots() {
-            document.querySelectorAll('.dot').forEach((dot, idx) => {
-                dot.classList.toggle('active', idx === currentIndex);
-            });
-        }
-
-        function updateCounter() {
-            document.getElementById('card-counter').textContent = `${currentIndex + 1} / ${vocabulary.length}`;
-        }
-
-        function updateStats() {
-            const total = stats.master + stats.reviewing + stats.learning || 1;
-
-            document.getElementById('master-bar').style.width = `${(stats.master / total) * 100}%`;
-            document.getElementById('master-text').textContent = `${Math.round((stats.master / total) * 100)}%`;
-
-            document.getElementById('reviewing-bar').style.width = `${(stats.reviewing / total) * 100}%`;
-            document.getElementById('reviewing-text').textContent = `${Math.round((stats.reviewing / total) * 100)}%`;
-
-            document.getElementById('learning-bar').style.width = `${(stats.learning / total) * 100}%`;
-            document.getElementById('learning-text').textContent = `${Math.round((stats.learning / total) * 100)}%`;
-        }
-
-        // Language Pills
-        document.querySelectorAll('.lang-pill').forEach(pill => {
-            pill.addEventListener('click', function () {
-                document.querySelectorAll('.lang-pill').forEach(p => p.classList.remove('active'));
-                this.classList.add('active');
-            });
-        });
-
-        // Keyboard Support
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'ArrowLeft') swipeCard('left');
-            if (e.key === 'ArrowRight') swipeCard('right');
-            if (e.key === ' ' || e.key === 'Enter') {
-                e.preventDefault();
-                flipCurrentCard();
-            }
-        });
-
-        init();
-    </script>
 
 </body>
 

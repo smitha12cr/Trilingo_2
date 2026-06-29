@@ -1,0 +1,1539 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us | Mother Tongue Learning</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2D6A4F;
+            --primary-dark: #1B4332;
+            --primary-light: #52B788;
+            --accent: #D4A373;
+            --accent-light: #FAEDCD;
+            --bg-cream: #FEFAE0;
+            --bg-white: #FFFFFF;
+            --text-dark: #1A1A1A;
+            --text-medium: #4A4A4A;
+            --text-light: #6B7280;
+            --border: #E5E7EB;
+            --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --radius: 12px;
+            --radius-lg: 20px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text-dark);
+            line-height: 1.7;
+            background: var(--bg-white);
+            overflow-x: hidden;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo-icon {
+            width: 36px;
+            height: 36px;
+            background: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-medium);
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-cta {
+            background: var(--primary);
+            color: white !important;
+            padding: 0.6rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+        }
+
+        .nav-cta:hover {
+            background: var(--primary-dark);
+            color: white !important;
+        }
+
+        .nav-cta::after {
+            display: none !important;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-dark);
+        }
+
+        /* Page Header */
+        .page-header {
+            min-height: 50vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 50%, var(--primary-light) 100%);
+            position: relative;
+            overflow: hidden;
+            padding-top: 80px;
+            text-align: center;
+        }
+
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.05) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .page-header::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: -10%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(212, 163, 115, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .page-header-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            padding: 2rem;
+        }
+
+        .page-header-content h1 {
+            font-size: 3.5rem;
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .page-header-content p {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.85);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .breadcrumb {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .breadcrumb a {
+            color: rgba(255, 255, 255, 0.9);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .breadcrumb a:hover {
+            color: white;
+        }
+
+        .breadcrumb span {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        /* Section Styles */
+        .section {
+            padding: 6rem 2rem;
+            position: relative;
+        }
+
+        .section-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 4rem;
+        }
+
+        .section-label {
+            display: inline-block;
+            background: rgba(45, 106, 79, 0.1);
+            color: var(--primary);
+            padding: 0.4rem 1.2rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            color: var(--primary-dark);
+            margin-bottom: 1rem;
+        }
+
+        .section-header p {
+            color: var(--text-medium);
+            font-size: 1.1rem;
+        }
+
+        /* Our Story */
+        .our-story {
+            background: var(--bg-white);
+        }
+
+        .story-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .story-image {
+            position: relative;
+        }
+
+        .story-img-main {
+            width: 100%;
+            height: 500px;
+            background: linear-gradient(135deg, var(--accent-light), var(--bg-cream));
+            border-radius: var(--radius-lg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .story-img-main::before {
+            content: '📖';
+            font-size: 6rem;
+            opacity: 0.4;
+        }
+
+        .story-img-accent {
+            position: absolute;
+            bottom: -30px;
+            right: -30px;
+            width: 180px;
+            height: 180px;
+            background: var(--primary);
+            border-radius: var(--radius-lg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .story-img-accent::before {
+            content: '🌱';
+            font-size: 3.5rem;
+        }
+
+        .story-content h2 {
+            font-size: 2.5rem;
+            color: var(--primary-dark);
+            margin-bottom: 1.5rem;
+        }
+
+        .story-content>p {
+            font-size: 1.1rem;
+            color: var(--text-medium);
+            margin-bottom: 1.5rem;
+        }
+
+        .story-quote {
+            background: var(--bg-cream);
+            border-left: 4px solid var(--primary);
+            padding: 1.5rem 2rem;
+            border-radius: 0 var(--radius) var(--radius) 0;
+            font-style: italic;
+            color: var(--text-medium);
+            margin: 2rem 0;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .story-quote cite {
+            display: block;
+            margin-top: 0.75rem;
+            font-style: normal;
+            font-weight: 600;
+            color: var(--primary-dark);
+            font-size: 0.9rem;
+        }
+
+        /* Mission & Vision */
+        .mission-vision {
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .mission-vision::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+
+        .mission-vision .section-header h2 {
+            color: white;
+        }
+
+        .mission-vision .section-header p {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .mv-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .mv-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: var(--radius-lg);
+            padding: 3rem;
+            transition: var(--transition);
+        }
+
+        .mv-card:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-5px);
+        }
+
+        .mv-icon {
+            width: 60px;
+            height: 60px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: var(--radius);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .mv-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: white;
+        }
+
+        .mv-card p {
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 1.05rem;
+        }
+
+        .mv-values {
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        .mv-values h4 {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .mv-values-list {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .mv-values-list li {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 0.4rem 1rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            color: white;
+        }
+
+        /* What We Believe */
+        .beliefs {
+            background: var(--bg-cream);
+        }
+
+        .beliefs-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+        }
+
+        .belief-card {
+            background: white;
+            border-radius: var(--radius-lg);
+            padding: 2.5rem;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+            border: 1px solid var(--border);
+            display: flex;
+            gap: 1.5rem;
+            align-items: flex-start;
+        }
+
+        .belief-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary-light);
+        }
+
+        .belief-icon-wrap {
+            width: 60px;
+            height: 60px;
+            min-width: 60px;
+            background: linear-gradient(135deg, var(--primary-light), var(--primary));
+            border-radius: var(--radius);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        .belief-card h3 {
+            font-size: 1.3rem;
+            color: var(--primary-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .belief-card p {
+            color: var(--text-medium);
+            font-size: 0.95rem;
+        }
+
+        /* Our Impact */
+        .impact {
+            background: var(--bg-white);
+        }
+
+        .impact-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+        }
+
+        .impact-card {
+            background: var(--bg-cream);
+            border-radius: var(--radius-lg);
+            padding: 2.5rem 2rem;
+            text-align: center;
+            transition: var(--transition);
+            border: 1px solid var(--border);
+        }
+
+        .impact-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary-light);
+        }
+
+        .impact-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .impact-card h3 {
+            font-size: 1.1rem;
+            color: var(--primary-dark);
+            margin-bottom: 0.75rem;
+        }
+
+        .impact-card p {
+            color: var(--text-medium);
+            font-size: 0.9rem;
+        }
+
+        /* Team Section */
+        .team {
+            background: linear-gradient(135deg, var(--bg-cream), var(--accent-light));
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+        }
+
+        .team-card {
+            background: white;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+            border: 1px solid var(--border);
+        }
+
+        .team-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .team-avatar {
+            width: 100%;
+            height: 220px;
+            background: linear-gradient(135deg, var(--primary-light), var(--primary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+        }
+
+        .team-info {
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .team-info h3 {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 0.25rem;
+        }
+
+        .team-info span {
+            font-size: 0.85rem;
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .team-info p {
+            font-size: 0.85rem;
+            color: var(--text-light);
+            margin-top: 0.75rem;
+        }
+
+        /* Journey Timeline */
+        .journey {
+            background: var(--bg-white);
+        }
+
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 3px;
+            height: 100%;
+            background: linear-gradient(180deg, var(--primary-light), var(--primary));
+            border-radius: 3px;
+        }
+
+        .timeline-item {
+            display: flex;
+            justify-content: flex-end;
+            padding-right: 50%;
+            position: relative;
+            margin-bottom: 3rem;
+        }
+
+        .timeline-item:nth-child(even) {
+            justify-content: flex-start;
+            padding-right: 0;
+            padding-left: 50%;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 20px;
+            background: var(--primary);
+            border-radius: 50%;
+            border: 4px solid white;
+            box-shadow: var(--shadow-md);
+            z-index: 1;
+        }
+
+        .timeline-content {
+            background: var(--bg-cream);
+            border-radius: var(--radius);
+            padding: 1.5rem 2rem;
+            max-width: 340px;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border);
+            position: relative;
+        }
+
+        .timeline-content::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            width: 0;
+            height: 0;
+            border: 10px solid transparent;
+        }
+
+        .timeline-item:nth-child(odd) .timeline-content::before {
+            right: -20px;
+            border-left-color: var(--bg-cream);
+        }
+
+        .timeline-item:nth-child(even) .timeline-content::before {
+            left: -20px;
+            border-right-color: var(--bg-cream);
+        }
+
+        .timeline-year {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-content h3 {
+            font-size: 1.2rem;
+            color: var(--primary-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-content p {
+            font-size: 0.95rem;
+            color: var(--text-medium);
+        }
+
+        /* Languages We Support */
+        .languages {
+            background: var(--bg-cream);
+        }
+
+        .languages-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+        }
+
+        .language-card {
+            background: white;
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            text-align: center;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+            border: 1px solid var(--border);
+        }
+
+        .language-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary-light);
+        }
+
+        .language-flag {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, var(--primary-light), var(--primary));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin: 0 auto 1rem;
+            color: white;
+        }
+
+        .language-card h3 {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--primary-dark);
+            margin-bottom: 0.25rem;
+        }
+
+        .language-card span {
+            font-size: 0.8rem;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .language-card p {
+            font-size: 0.85rem;
+            color: var(--text-medium);
+            margin-top: 0.75rem;
+        }
+
+        .language-status {
+            display: inline-block;
+            margin-top: 0.75rem;
+            padding: 0.25rem 0.75rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .status-live {
+            background: rgba(82, 183, 136, 0.15);
+            color: var(--primary);
+        }
+
+        .status-coming {
+            background: rgba(212, 163, 115, 0.15);
+            color: var(--accent);
+        }
+
+        /* CTA Section */
+        .cta {
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -20%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.05) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .cta h2 {
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta p {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.85);
+            max-width: 600px;
+            margin: 0 auto 2.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 1;
+        }
+
+        .btn {
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            border: none;
+        }
+
+        .btn-primary {
+            background: white;
+            color: var(--primary);
+        }
+
+        .btn-primary:hover {
+            background: var(--bg-cream);
+            color: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-outline:hover {
+            background: white;
+            color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--primary-dark);
+            color: white;
+            padding: 4rem 2rem 2rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 3rem;
+            max-width: 1200px;
+            margin: 0 auto 3rem;
+        }
+
+        .footer-brand h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: white;
+        }
+
+        .footer-brand p {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        .footer-column h4 {
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: white;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: var(--transition);
+            font-size: 0.95rem;
+        }
+
+        .footer-links a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: var(--transition);
+            font-size: 1.1rem;
+        }
+
+        .social-links a:hover {
+            background: var(--primary-light);
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 2rem;
+            text-align: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-bottom p {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.9rem;
+        }
+
+        /* Scroll animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+
+            .impact-grid,
+            .team-grid,
+            .languages-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: white;
+                flex-direction: column;
+                padding: 1.5rem;
+                gap: 1rem;
+                box-shadow: var(--shadow-lg);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .page-header-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .story-grid,
+            .mv-grid,
+            .beliefs-grid,
+            .impact-grid,
+            .team-grid,
+            .languages-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .timeline::before {
+                left: 20px;
+            }
+
+            .timeline-item,
+            .timeline-item:nth-child(even) {
+                justify-content: flex-start;
+                padding-right: 0;
+                padding-left: 50px;
+            }
+
+            .timeline-dot {
+                left: 20px;
+                transform: translateX(-50%);
+            }
+
+            .timeline-content::before {
+                display: none;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .section {
+                padding: 4rem 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .page-header-content h1 {
+                font-size: 2rem;
+            }
+
+            .section-header h2 {
+                font-size: 1.8rem;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .impact-number {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+    <base target="_blank">
+</head>
+
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <span class="logo-icon">🌿</span>
+                Mother Tongue
+            </a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="service.html">Services</a></li>
+                <li><a href="features.html">Features</a></li>
+                <li><a href="index.html#volunteer">Volunteer</a></li>
+                <li><a href="index.html#partners">Partners</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+                <li><a href="index.html#contact" class="nav-cta">Get Started</a></li>
+            </ul>
+            <button class="mobile-menu-btn" onclick="toggleMenu()">☰</button>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <header class="page-header">
+        <div class="page-header-content">
+            <div class="breadcrumb">
+                <a href="index.html">Home</a>
+                <span>/</span>
+                <a href="service.html">Services</a>
+            </div>
+            <h1>About Us</h1>
+            <p>We are on a mission to make education accessible, inclusive, and culturally rooted for every tribal child
+                across India.</p>
+        </div>
+    </header>
+
+    <!-- Our Story -->
+    <section class="section our-story">
+        <div class="section-container">
+            <div class="story-grid">
+                <div class="story-image">
+                    <img src="./images/education2 .png" class="story-img-main" style="object-fit: cover;"
+                        alt="Our Story">
+                    <img src="./images/education6.png" class="story-img-accent" style="object-fit: cover;"
+                        alt="Education">
+                </div>
+                <div class="story-content">
+                    <span class="section-label">Our Story</span>
+                    <h2>Where It All Began</h2>
+                    <p>Mother Tongue Learning was born from a simple yet powerful observation: millions of tribal
+                        children across India struggle in school because they are taught in languages they do not speak
+                        at home. This language gap creates confusion, discouragement, and ultimately, higher dropout
+                        rates.</p>
+                    <p>We started with a question — <strong>what if children could learn in the language they already
+                            know?</strong> What if education could begin with understanding rather than confusion?</p>
+                    <div class="story-quote">
+                        "When a child learns in their mother tongue, they do not just understand words — they understand
+                        the world around them."
+                        <cite>— Our Founding Principle</cite>
+                    </div>
+                    <p>Today, we are building a digital platform that empowers tribal communities to preserve, teach,
+                        and celebrate their languages through interactive, culturally connected education.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mission & Vision -->
+    <section class="section mission-vision">
+        <div class="section-container">
+            <div class="section-header">
+                <span class="section-label" style="background: rgba(255,255,255,0.15); color: white;">Our Purpose</span>
+                <h2>Mission & Vision</h2>
+                <p>Guided by purpose, driven by community.</p>
+            </div>
+            <div class="mv-grid">
+                <div class="mv-card">
+                    <div class="mv-icon">🎯</div>
+                    <h3>Our Mission</h3>
+                    <p>To make education accessible, inclusive, and culturally relevant for tribal communities through
+                        technology-driven mother-tongue learning. We believe every child deserves to learn in a language
+                        they understand, without losing their identity in the process.</p>
+                    <div class="mv-values">
+                        <h4>Core Values</h4>
+                        <ul class="mv-values-list">
+                            <li>Inclusivity</li>
+                            <li>Cultural Pride</li>
+                            <li>Accessibility</li>
+                            <li>Community First</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="mv-card">
+                    <div class="mv-icon">🔭</div>
+                    <h3>Our Vision</h3>
+                    <p>A future where every child can learn, dream, and succeed without losing their language, identity,
+                        or heritage. A world where tribal languages thrive in classrooms, not just in memory.</p>
+                    <div class="mv-values">
+                        <h4>What We Envision</h4>
+                        <ul class="mv-values-list">
+                            <li>Zero Language Barriers</li>
+                            <li>Thriving Tribal Languages</li>
+                            <li>Empowered Communities</li>
+                            <li>Equal Opportunities</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- What We Believe -->
+    <section class="section beliefs">
+        <div class="section-container">
+            <div class="section-header">
+                <span class="section-label">Our Beliefs</span>
+                <h2>What We Stand For</h2>
+                <p>These principles guide every decision we make.</p>
+            </div>
+            <div class="beliefs-grid">
+                <div class="belief-card">
+                    <div class="belief-icon-wrap">🧑‍🎓</div>
+                    <div>
+                        <h3>Education in Mother Tongue</h3>
+                        <p>Children learn best when they understand the language of instruction. Mother-tongue education
+                            is not a luxury — it is a fundamental right.</p>
+                    </div>
+                </div>
+                <div class="belief-card">
+                    <div class="belief-icon-wrap">⚖️</div>
+                    <div>
+                        <h3>Equal Learning Opportunities</h3>
+                        <p>Every child, regardless of background or geography, deserves access to quality education that
+                            respects and reflects who they are.</p>
+                    </div>
+                </div>
+                <div class="belief-card">
+                    <div class="belief-icon-wrap">🪘</div>
+                    <div>
+                        <h3>Cultural Pride & Inclusion</h3>
+                        <p>Language is identity. We celebrate tribal cultures, stories, and traditions as essential
+                            parts of the learning journey.</p>
+                    </div>
+                </div>
+                <div class="belief-card">
+                    <div class="belief-icon-wrap">💻</div>
+                    <div>
+                        <h3>Digital Access for All</h3>
+                        <p>Technology should bridge gaps, not create them. Our platform is designed to work across
+                            devices, even in low-connectivity areas.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Impact -->
+    <section class="section impact">
+        <div class="section-container">
+            <div class="section-header">
+                <span class="section-label">Impact</span>
+                <h2>The Numbers That Matter</h2>
+                <p>Real data behind our commitment to tribal education.</p>
+            </div>
+            <div class="impact-grid">
+                <div class="impact-card">
+                    <div class="impact-number">30M+</div>
+                    <h3>Tribal Children</h3>
+                    <p>Can benefit from mother-tongue education across India.</p>
+                </div>
+                <div class="impact-card">
+                    <div class="impact-number">400+</div>
+                    <h3>Communities</h3>
+                    <p>Unique tribal communities with rich linguistic heritage.</p>
+                </div>
+                <div class="impact-card">
+                    <div class="impact-number">780+</div>
+                    <h3>Languages</h3>
+                    <p>Indigenous and tribal languages spoken across India.</p>
+                </div>
+                <div class="impact-card">
+                    <div class="impact-number">1</div>
+                    <h3>Mission</h3>
+                    <p>Empower children through language-inclusive education.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Languages We Support -->
+    <section class="section languages">
+        <div class="section-container">
+            <div class="section-header">
+                <span class="section-label">Languages</span>
+                <h2>Languages We Support</h2>
+                <p>Currently active and coming soon to our platform.</p>
+            </div>
+            <div class="languages-grid">
+                <div class="language-card">
+                    <div class="language-flag">🌾</div>
+                    <h3>Mundari</h3>
+                    <span>Munda Language Family</span>
+                    <p>Spoken by the Munda tribe across Jharkhand, Odisha, and West Bengal.</p>
+                    <span class="language-status status-live">Live</span>
+                </div>
+                <div class="language-card">
+                    <div class="language-flag">🎋</div>
+                    <h3>Santali</h3>
+                    <span>Munda Language Family</span>
+                    <p>One of the most widely spoken tribal languages in India with rich oral traditions.</p>
+                    <span class="language-status status-live">Live</span>
+                </div>
+                <div class="language-card">
+                    <div class="language-flag">🔥</div>
+                    <h3>Ho</h3>
+                    <span>Munda Language Family</span>
+                    <p>Native to the Ho people of Jharkhand, Odisha, and West Bengal.</p>
+                    <span class="language-status status-live">Live</span>
+                </div>
+                <div class="language-card">
+                    <div class="language-flag">🍃</div>
+                    <h3>Kurukh</h3>
+                    <span>Dravidian Language Family</span>
+                    <p>Spoken by the Oraon tribe, with speakers across Jharkhand, Chhattisgarh, and beyond.</p>
+                    <span class="language-status status-coming">Coming Soon</span>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Journey -->
+    <section class="section journey">
+        <div class="section-container">
+            <div class="section-header">
+                <span class="section-label">Timeline</span>
+                <h2>Our Journey</h2>
+                <p>Milestones that shaped Mother Tongue Learning.</p>
+            </div>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <span class="timeline-year">2023</span>
+                        <h3>The Beginning</h3>
+                        <p>Research and community outreach began across tribal regions in Jharkhand and Odisha to
+                            understand language barriers in education.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <span class="timeline-year">2024</span>
+                        <h3>Platform Development</h3>
+                        <p>Started building the digital learning platform with native speakers, educators, and
+                            linguists. First lessons created in Mundari and Santali.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <span class="timeline-year">2025</span>
+                        <h3>Pilot Launch</h3>
+                        <p>Launched the first version of the app with interactive lessons, quizzes, and progress
+                            tracking for Mundari and Santali learners.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <span class="timeline-year">2026</span>
+                        <h3>Expanding Horizons</h3>
+                        <p>Added Ho language support, partnered with schools and NGOs, and launched the volunteer
+                            program for community-driven content creation.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <span class="timeline-year">Future</span>
+                        <h3>The Road Ahead</h3>
+                        <p>Aiming to support 20+ tribal languages, reach 100,000+ learners, and establish Mother Tongue
+                            Learning as a national movement for inclusive education.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="section team">
+        <div class="section-container">
+            <div class="section-header">
+                <span class="section-label">People</span>
+                <h2>Meet the Team</h2>
+                <p>Passionate individuals working to transform tribal education.</p>
+            </div>
+            <div class="team-grid">
+                <div class="team-card">
+                    <div class="team-avatar">👤</div>
+                    <div class="team-info">
+                        <h3>Founder & CEO</h3>
+                        <span>Leadership</span>
+                        <p>Driving the vision and strategy to make mother-tongue education a reality for every tribal
+                            child.</p>
+                    </div>
+                </div>
+                <div class="team-card">
+                    <div class="team-avatar">👤</div>
+                    <div class="team-info">
+                        <h3>Head of Education</h3>
+                        <span>Curriculum</span>
+                        <p>Designing culturally relevant learning paths with educators and native language experts.</p>
+                    </div>
+                </div>
+                <div class="team-card">
+                    <div class="team-avatar">👤</div>
+                    <div class="team-info">
+                        <h3>Tech Lead</h3>
+                        <span>Engineering</span>
+                        <p>Building accessible, scalable technology that works even in low-connectivity regions.</p>
+                    </div>
+                </div>
+                <div class="team-card">
+                    <div class="team-avatar">👤</div>
+                    <div class="team-info">
+                        <h3>Community Manager</h3>
+                        <span>Outreach</span>
+                        <p>Connecting with tribal communities, volunteers, and partners to grow our impact.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="section cta">
+        <div class="section-container">
+            <h2>Be Part of the Change</h2>
+            <p>Whether you are a learner, educator, volunteer, or partner — there is a place for you in this movement.
+            </p>
+            <div class="cta-buttons">
+                <a href="index.html#contact" class="btn btn-primary">Contact Us</a>
+                <a href="index.html#volunteer" class="btn btn-outline">Become a Volunteer</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <h3>🌿 Mother Tongue</h3>
+                <p>We are dedicated to empowering tribal and indigenous learners through accessible mother-tongue
+                    education and language preservation.</p>
+                <div class="social-links">
+                    <a href="#" title="Facebook">f</a>
+                    <a href="#" title="Twitter">𝕏</a>
+                    <a href="#" title="Instagram">📷</a>
+                    <a href="#" title="LinkedIn">in</a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h4>Quick Links</h4>
+                <ul class="footer-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="service.html">Services</a></li>
+                    <li><a href="features.html">Languages</a></li>
+                    <li><a href="index.html#volunteer">Volunteer</a></li>
+                    <li><a href="index.html#partners">Partnerships</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Resources</h4>
+                <ul class="footer-links">
+                    <li><a href="#">Learning Materials</a></li>
+                    <li><a href="#">Volunteer Guide</a></li>
+                    <li><a href="#">Partner Portal</a></li>
+                    <li><a href="#">Research & Reports</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Social Media</h4>
+                <ul class="footer-links">
+                    <li><a href="#">Facebook</a></li>
+                    <li><a href="#">Twitter / X</a></li>
+                    <li><a href="#">Instagram</a></li>
+                    <li><a href="#">LinkedIn</a></li>
+                    <li><a href="#">YouTube</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 Mother Tongue Learning. All rights reserved. Empowering tribal education through language.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        function toggleMenu() {
+            document.getElementById('navLinks').classList.toggle('active');
+        }
+
+        // Close mobile menu on link click
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.getElementById('navLinks').classList.remove('active');
+            });
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.style.boxShadow = '0 4px 20px rgba(0,0,0,0.08)';
+            } else {
+                navbar.style.boxShadow = 'none';
+            }
+        });
+
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.section-header, .story-grid, .mv-grid, .beliefs-grid, .impact-grid, .languages-grid, .timeline-item, .team-grid').forEach(el => {
+            el.classList.add('fade-in');
+            observer.observe(el);
+        });
+    </script>
+
+</body>
+
+</html>
